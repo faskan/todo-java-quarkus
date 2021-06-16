@@ -25,14 +25,14 @@ public class TodoResourceIT {
     void shouldSaveTodo() throws JSONException {
         Todo todo = given()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                .body(new Todo("","Find", "Find the letter F"))
+                .body(new Todo("Find", "Find the letter F"))
                 .when().post("/api/todos")
                 .then()
                 .statusCode(200)
                 .extract()
                 .as(Todo.class);
-        assertThat(todo.id()).isNotNull();
-        assertThat(todo.name()).isEqualTo("Find");
-        assertThat(todo.description()).isEqualTo("Find the letter F");
+        assertThat(todo.id).isNotNull();
+        assertThat(todo.name).isEqualTo("Find");
+        assertThat(todo.description).isEqualTo("Find the letter F");
     }
 }
