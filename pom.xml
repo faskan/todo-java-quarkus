@@ -19,6 +19,7 @@
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <jsonassert.version>1.5.0</jsonassert.version>
     <assertj-core.version>3.19.0</assertj-core.version>
+    <testcontainers.mongodb.version>1.15.3</testcontainers.mongodb.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -59,8 +60,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>de.flapdoodle.embed</groupId>
-      <artifactId>de.flapdoodle.embed.mongo</artifactId>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>mongodb</artifactId>
+      <version>${testcontainers.mongodb.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
