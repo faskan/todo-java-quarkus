@@ -10,7 +10,6 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -35,12 +34,10 @@ public class TodoResourceIT {
                 .then()
                 .statusCode(200)
                 .extract().response().asString();
-        JSONAssert.assertEquals("""
-                [{
-                    "name" : "Find",
-                    "description" : "Find the letter F"
-                }]
-                """, response, JSONCompareMode.LENIENT);
+        JSONAssert.assertEquals("[{\n" +
+                "                    \"name\" : \"Find\",\n" +
+                "                    \"description\" : \"Find the letter F\"\n" +
+                "                }]", response, JSONCompareMode.LENIENT);
     }
 
     @Test
@@ -52,12 +49,10 @@ public class TodoResourceIT {
                 .then()
                 .statusCode(200)
                 .extract().response().asString();
-        JSONAssert.assertEquals("""
-                {
-                    "name" : "Find",
-                    "description" : "Find the letter F"
-                }
-                """, response, JSONCompareMode.LENIENT);
+        JSONAssert.assertEquals("{\n" +
+                "                    \"name\" : \"Find\",\n" +
+                "                    \"description\" : \"Find the letter F\"\n" +
+                "                }", response, JSONCompareMode.LENIENT);
     }
 
     @Test
@@ -82,12 +77,10 @@ public class TodoResourceIT {
         //update
         given()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-                .body("""
-                        {
-                            "name" : "Replace",
-                            "description" : "Replace by K"
-                        }
-                        """)
+                .body("{\n" +
+                        "                            \"name\" : \"Replace\",\n" +
+                        "                            \"description\" : \"Replace by K\"\n" +
+                        "                        }")
                 .when().put("/api/todos/{id}", Map.of("id", todo.id.toString()))
                 .then()
                 .statusCode(200);
@@ -97,12 +90,10 @@ public class TodoResourceIT {
                 .then()
                 .statusCode(200)
                 .extract().response().asString();
-        JSONAssert.assertEquals("""
-                {
-                    "name" : "Replace",
-                    "description" : "Replace by K"
-                }
-                """, response, JSONCompareMode.LENIENT);
+        JSONAssert.assertEquals("{\n" +
+                "                    \"name\" : \"Replace\",\n" +
+                "                    \"description\" : \"Replace by K\"\n" +
+                "                }", response, JSONCompareMode.LENIENT);
     }
 
     @Test
