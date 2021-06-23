@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.MongoDBContainer;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
@@ -22,7 +22,7 @@ public class TodoResourceIT {
     @Inject
     TodoRepository todoRepository;
 
-    static GenericContainer mongodb = new GenericContainer<>("mongo:4.2").withExposedPorts(27017);
+    static MongoDBContainer mongodb = new MongoDBContainer("mongo:4.2").withExposedPorts(27017);
     static {
         mongodb.start();
         System.setProperty("quarkus.mongodb.connection-string",
